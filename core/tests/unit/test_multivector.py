@@ -14,7 +14,7 @@ from core.vector_store.multi_vector_store import MultiVectorStore
 setup_test_logging()
 
 # Test database URI
-TEST_DB_URI = "postgresql://postgres:postgres@localhost:5432/test_db"
+TEST_DB_URI = "postgresql://postgres:postgres@localhost:5434/test_db"
 
 logger = logging.getLogger(__name__)
 

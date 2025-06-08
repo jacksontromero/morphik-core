@@ -1,5 +1,5 @@
-x-ollama-check: &ollama-check
-  # This command reads the toml file and checks if any provider is set to "ollama"
+x-ollama-check:
+  &ollama-check # This command reads the toml file and checks if any provider is set to "ollama"
   command: >
     /bin/sh -c '
     grep -q "provider *= *\"ollama\"" morphik.toml &&
@@ -16,10 +16,10 @@ services:
   morphik:
     build: .
     ports:
-      - "8000:8000"
+      - '8000:8000'
     environment:
       - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-secret-key-here}
-      - POSTGRES_URI=postgresql+asyncpg://morphik:morphik@postgres:5432/morphik
+      - POSTGRES_URI=postgresql+asyncpg://morphik:morphik@postgres:5434/morphik
       - PGPASSWORD=morphik
       - HOST=0.0.0.0
       - PORT=8000
@@ -53,7 +53,7 @@ services:
     command: arq core.workers.ingestion_worker.WorkerSettings
     environment:
       - JWT_SECRET_KEY=${JWT_SECRET_KEY:-your-secret-key-here}
-      - POSTGRES_URI=postgresql+asyncpg://morphik:morphik@postgres:5432/morphik
+      - POSTGRES_URI=postgresql+asyncpg://morphik:morphik@postgres:5434/morphik
       - PGPASSWORD=morphik
       - LOG_LEVEL=DEBUG
       - REDIS_HOST=redis
@@ -81,12 +81,12 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      - '6379:6379'
     volumes:
       - redis_data:/data
     command: redis-server --appendonly yes
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: ['CMD', 'redis-cli', 'ping']
       interval: 5s
       timeout: 3s
       retries: 5
@@ -104,11 +104,11 @@ services:
       - POSTGRES_DB=morphik
       - PGDATA=/var/lib/postgresql/data/pgdata
     ports:
-      - "5432:5432"
+      - '5434:5434'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U morphik -d morphik"]
+      test: ['CMD-SHELL', 'pg_isready -U morphik -d morphik']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -121,13 +121,13 @@ services:
     profiles:
       - ollama
     ports:
-      - "11434:11434"
+      - '11434:11434'
     volumes:
       - ollama_data:/root/.ollama
       - ./ollama-entrypoint.sh:/ollama-entrypoint.sh
     networks:
       - morphik-network
-    entrypoint: ["/ollama-entrypoint.sh"]
+    entrypoint: ['/ollama-entrypoint.sh']
 
 networks:
   morphik-network:
@@ -138,4 +138,3 @@ volumes:
   ollama_data:
   huggingface_cache:
   redis_data:
- 

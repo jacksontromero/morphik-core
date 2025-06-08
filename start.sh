@@ -23,7 +23,7 @@ create_env_file() {
         echo "Creating .env file..."
         cat > .env << EOL
 JWT_SECRET_KEY=your-secret-key-here
-POSTGRES_URI=postgresql+asyncpg://morphik:morphik@postgres:5432/morphik
+POSTGRES_URI=postgresql+asyncpg://morphik:morphik@postgres:5434/morphik
 PGPASSWORD=morphik
 HOST=0.0.0.0
 PORT=8000
@@ -69,4 +69,4 @@ fi
 echo "Morphik is now running!"
 echo "API is available at http://localhost:8000"
 echo "To view logs, run: docker compose logs -f"
-echo "To stop the services, run: docker compose down" 
+echo "To stop the services, run: docker compose down"

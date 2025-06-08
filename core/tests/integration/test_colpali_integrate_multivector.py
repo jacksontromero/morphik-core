@@ -16,7 +16,7 @@ setup_test_logging()
 logger = logging.getLogger(__name__)
 
 # Test database URI
-TEST_DB_URI = "postgresql://postgres:postgres@localhost:5432/test_db"
+TEST_DB_URI = "postgresql://postgres:postgres@localhost:5434/test_db"
 
 # Path to the test PDF file
 PDF_FILE_PATH = os.path.join(

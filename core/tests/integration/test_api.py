@@ -39,7 +39,7 @@ TEST_SERVER_URL = os.getenv("TEST_SERVER_URL", "http://localhost:8000")
 
 def confirm_test_database():
     """Confirm that we're using a test database before running tests."""
-    expected_test_uri = "postgresql+asyncpg://morphik@localhost:5432/morphik_test"
+    expected_test_uri = "postgresql+asyncpg://morphik@localhost:5434/morphik_test"
     actual_uri = settings.POSTGRES_URI
 
     if not actual_uri:

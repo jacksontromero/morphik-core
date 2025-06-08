@@ -647,7 +647,7 @@ async def startup(ctx):
     # Initialize database
     logger.info("Initializing database...")
     database = PostgresDatabase(uri=settings.POSTGRES_URI)
-    # database = PostgresDatabase(uri="postgresql+asyncpg://morphik:morphik@postgres:5432/morphik")
+    # database = PostgresDatabase(uri="postgresql+asyncpg://morphik:morphik@postgres:5434/morphik")
     success = await database.initialize()
     if success:
         logger.info("Database initialization successful")
@@ -658,7 +658,7 @@ async def startup(ctx):
     # Initialize vector store
     logger.info("Initializing primary vector store...")
     vector_store = PGVectorStore(uri=settings.POSTGRES_URI)
-    # vector_store = PGVectorStore(uri="postgresql+asyncpg://morphik:morphik@postgres:5432/morphik")
+    # vector_store = PGVectorStore(uri="postgresql+asyncpg://morphik:morphik@postgres:5434/morphik")
     success = await vector_store.initialize()
     if success:
         logger.info("Primary vector store initialization successful")
@@ -716,7 +716,7 @@ async def startup(ctx):
 
         # Vector store is needed for both local and api modes
         colpali_vector_store = MultiVectorStore(uri=settings.POSTGRES_URI)
-        # colpali_vector_store = MultiVectorStore(uri="postgresql+asyncpg://morphik:morphik@postgres:5432/morphik")
+        # colpali_vector_store = MultiVectorStore(uri="postgresql+asyncpg://morphik:morphik@postgres:5434/morphik")
         success = await asyncio.to_thread(colpali_vector_store.initialize)
         if success:
             logger.info("ColPali vector store initialization successful")
